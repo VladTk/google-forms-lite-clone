@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid';
 import { forms, responses } from '../store/store';
-import { ResponseInput, Response as Resp } from '../../../shared/src/types';
+import { ResponseInput, Response as Resp } from '@shared/types';
 
 export const responseResolver = {
   Query: {

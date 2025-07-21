@@ -1,5 +1,4 @@
 {
-  "extends": "../tsconfig.json",
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
@@ -10,5 +9,4 @@
     "target": "ES2020",
     "esModuleInterop": true
   },
-  "references": [{ "path": "../shared" }]
 }

@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid';
 import { forms } from '../store/store';
-import { QuestionType, Form, FormInput } from '../../../shared/src/types';
+import { QuestionType, Form, FormInput } from '@shared/types';
 
 export const formResolver = {
   Query: {
