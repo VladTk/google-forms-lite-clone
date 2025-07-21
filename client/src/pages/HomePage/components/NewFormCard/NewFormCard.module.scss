@@ -1,0 +1,23 @@
+@use '../../../../styles/vars' as *;
+
+.new-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $bg-primary-surface;
+
+  border-radius: $border-radius-base;
+  overflow: hidden;
+  height: $form-card-height;
+
+  &__img-wrapper {
+    width: 100%;
+    height: 100%;
+  }
+
+  &__img {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+  }
+}

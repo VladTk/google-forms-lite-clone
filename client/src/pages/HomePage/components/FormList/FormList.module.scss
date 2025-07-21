@@ -1,0 +1,33 @@
+@use '../../../../styles/vars' as *;
+@use '../../../../styles/mixins' as *;
+
+.form-list {
+  &__list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+
+    @include on-tablet {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include on-desktop {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  &__item {
+    border: 1px solid $border-gray;
+    border-radius: $border-radius-base;
+    transition: border-color $transition-duration ease;
+    height: $form-card-height;
+
+    &:hover {
+      border-color: $accent-color;
+    }
+
+    &--loading {
+      pointer-events: none;
+    }
+  }
+}

@@ -1,0 +1,83 @@
+@use '../../../../styles/vars' as *;
+@use '../../../../styles/mixins' as *;
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  height: $form-card-height;
+  position: relative;
+
+  &--loading {
+    @include skeleton-loader;
+  }
+
+  &__decor {
+    position: absolute;
+    width: 100%;
+    height: 48px;
+    background-color: $accent-color;
+    border-top-left-radius: $border-radius-base;
+    border-top-right-radius: $border-radius-base;
+    z-index: 1;
+    top: -2px;
+    left: 0;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    row-gap: 24px;
+  }
+
+  &__title {
+    font-size: 18px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+    color: $text-white;
+    z-index: 2;
+    font-weight: 700;
+
+    @include on-tablet {
+      font-size: 20px;
+      font-weight: 600;
+    }
+  }
+
+  &__description {
+    color: $text-secondary;
+    overflow: hidden;
+    line-height: 1.2;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+    -webkit-box-orient: vertical;
+    height: calc(1.2em * 4);
+  }
+
+  &__links {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__link {
+    border-radius: $border-radius-base;
+    padding: 10px 15px;
+    border: 1px solid $accent-color;
+    background-color: $bg-primary-surface;
+    font-weight: 600;
+    color: $accent-color;
+    transition:
+      color $transition-duration ease,
+      border-color $transition-duration ease;
+
+    &:hover {
+      color: $text-white;
+      background-color: $accent-color;
+    }
+  }
+}

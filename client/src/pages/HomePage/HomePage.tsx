@@ -1,5 +1,18 @@
 import type React from 'react';
+import { useGetFormsQuery } from '../../store/api/formsApi';
+import { FormList } from './components';
+import { FormListSkeleton } from './components/FormList/FormListSkeleton';
+import { Container } from '../../components';
+import styles from './HomePage.module.scss';
 
 export const HomePage: React.FC = () => {
-  return <main></main>;
+  const { data: forms, isLoading } = useGetFormsQuery();
+
+  return (
+    <main className={styles.home}>
+      <Container>
+        {isLoading ? <FormListSkeleton /> : <FormList forms={forms ?? []} />}
+      </Container>
+    </main>
+  );
 };
