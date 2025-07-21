@@ -1,0 +1,13 @@
+@use './reset';
+@use './fonts';
+@use './vars' as *;
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: $bg-color;
+  color: $text-primary;
+  font-family: $font-open-sans;
+  font-size: 14px;
+}

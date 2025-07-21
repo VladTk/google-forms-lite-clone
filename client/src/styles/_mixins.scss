@@ -1,0 +1,27 @@
+@use './vars' as *;
+@use './animations' as *;
+
+@mixin on-tablet {
+  @media (min-width: $tablet-min-width) {
+    @content;
+  }
+}
+
+@mixin on-desktop {
+  @media (min-width: $desktop-min-width) {
+    @content;
+  }
+}
+
+@mixin skeleton-loader($radius: 15px) {
+  pointer-events: none;
+  border-radius: $radius;
+  background: linear-gradient(
+    110deg,
+    $color-skeleton-gradient-start 35%,
+    $color-skeleton-gradient-end 50%,
+    $color-skeleton-gradient-start 65%
+  );
+  background-size: 200% 100%;
+  animation: shine 1.5s linear infinite;
+}

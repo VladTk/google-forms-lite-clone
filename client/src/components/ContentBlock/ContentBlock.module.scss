@@ -1,0 +1,8 @@
+@use '../../styles/vars' as *;
+
+.block {
+  padding: 16px 12px;
+  border-radius: $border-radius-base;
+  background-color: $bg-primary-surface;
+  box-sizing: border-box;
+}
