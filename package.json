@@ -1,0 +1,17 @@
+{
+  "name": "google-forms-lite-clone",
+  "private": true,
+  "workspaces": [
+    "server",
+    "client",
+    "shared"
+  ],
+  "scripts": {
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
+    "dev": "concurrently \"npm --workspace server run dev\" \"npm --workspace client run dev\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.0.0",
+    "prettier": "^3.6.2"
+  }
+}
