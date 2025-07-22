@@ -1,8 +1,8 @@
 import type React from 'react';
-import { Link } from 'react-router-dom';
 import { ContentBlock } from '../../../../components';
 import type { Form } from '@shared/types';
 import styles from './FormCard.module.scss';
+import { ButtonLink } from '../../../../components/ui';
 
 type Props = {
   form: Form;
@@ -19,12 +19,8 @@ export const FormCard: React.FC<Props> = ({ form }) => {
         <p className={styles.card__description}>{description}</p>
       </div>
       <div className={styles.card__links}>
-        <Link to={`/forms/${id}/fill`} className={styles.card__link}>
-          View Form
-        </Link>
-        <Link to={`/forms/${id}/responses`} className={styles.card__link}>
-          Responses
-        </Link>
+        <ButtonLink to={`/forms/${id}/fill`}>View Form</ButtonLink>
+        <ButtonLink to={`/forms/${id}/responses`}>Responses</ButtonLink>
       </div>
     </ContentBlock>
   );

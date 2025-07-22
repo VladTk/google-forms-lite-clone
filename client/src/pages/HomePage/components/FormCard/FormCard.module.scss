@@ -63,21 +63,4 @@
     display: flex;
     justify-content: space-between;
   }
-
-  &__link {
-    border-radius: $border-radius-base;
-    padding: 10px 15px;
-    border: 1px solid $accent-color;
-    background-color: $bg-primary-surface;
-    font-weight: 600;
-    color: $accent-color;
-    transition:
-      color $transition-duration ease,
-      border-color $transition-duration ease;
-
-    &:hover {
-      color: $text-white;
-      background-color: $accent-color;
-    }
-  }
 }
