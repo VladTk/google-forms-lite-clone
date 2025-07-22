@@ -11,6 +11,7 @@ export const NewFormCard = () => {
           src="/new-form.png"
           alt="create new form"
           className={styles['new-form__img']}
+          draggable={false}
         />
       </div>
     </Link>
