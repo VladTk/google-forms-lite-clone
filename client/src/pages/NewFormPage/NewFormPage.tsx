@@ -74,6 +74,11 @@ export const NewFormPage: React.FC = () => {
     [errors.description, clearError],
   );
 
+  const handleAddQuestion = useCallback(() => {
+    addQuestion();
+    clearError('form');
+  }, [addQuestion, clearError]);
+
   const handleUpdateQuestion = useCallback(
     (tempId: string, fields: Partial<LocalQuestion>) => {
       updateQuestion(tempId, fields);
@@ -185,16 +190,18 @@ export const NewFormPage: React.FC = () => {
             />
           </div>
           <div className={styles['new-form-page__buttons']}>
-            <Button onClick={addQuestion} disabled={isLoading}>
+            <Button onClick={handleAddQuestion} disabled={isLoading}>
               Add question
             </Button>
             <Button onClick={handlePublish} loading={isLoading}>
               Publish
             </Button>
           </div>
-          {isError && (
+          {(isError || errors['form']) && (
             <div className={styles['new-form-page__error']}>
-              Something went wrong while publishing the form.
+              {isError
+                ? 'Something went wrong while publishing the form'
+                : errors['form']}
             </div>
           )}
         </div>

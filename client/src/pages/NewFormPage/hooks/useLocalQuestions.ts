@@ -124,7 +124,7 @@ export function useLocalQuestions(initialQuestions: QuestionInput[] = []) {
     const errors: Record<string, string> = {};
 
     if (questions.length === 0) {
-      errors._form = 'The form must contain at least one question';
+      errors['form'] = 'The form must contain at least one question';
       return errors;
     }
 
