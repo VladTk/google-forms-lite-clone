@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { formsApi } from './api/formsApi';
-import { responsesApi } from './api/responsesApi';
+import { formsApi } from '../api/formsApi';
+import { responsesApi } from '../api/responsesApi';
 
 export const store = configureStore({
   reducer: {

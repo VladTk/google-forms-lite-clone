@@ -1,5 +1,5 @@
 import type React from 'react';
-import { useGetFormsQuery } from '../../store/api/formsApi';
+import { useGetFormsQuery } from '../../api/formsApi';
 import { FormList } from './components';
 import { FormListSkeleton } from './components/FormList/FormListSkeleton';
 import { Container } from '../../components';

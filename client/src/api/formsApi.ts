@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import type { Form, FormInput } from '@shared/types';
 
-interface GraphQLResponse<T> {
+type GraphQLResponse<T> = {
   data: T;
 }
 
