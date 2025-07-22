@@ -2,25 +2,25 @@
 @use '../../styles/mixins' as *;
 
 .not-found {
-	margin-top: 36px;
+  margin-top: 36px;
 
-	&__info {
-		display: flex;
-		flex-direction: column;
-		row-gap: 16px;
-	}
+  &__info {
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+  }
 
   &__title {
     font-size: 32px;
     font-weight: 700;
 
-		@include on-tablet {
-			font-size: 42px;
-		}
+    @include on-tablet {
+      font-size: 42px;
+    }
 
-		@include on-desktop {
-			font-size: 48px;
-		}
+    @include on-desktop {
+      font-size: 48px;
+    }
   }
 
   &__description {
@@ -30,6 +30,6 @@
   }
 
   &__btn {
-		margin-top: 36px;
+    margin-top: 36px;
   }
 }
