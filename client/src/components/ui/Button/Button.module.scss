@@ -1,0 +1,57 @@
+@use '../../../styles/vars' as *;
+@use '../../../styles/animations' as *;
+
+.button {
+  position: relative;
+  border-radius: $border-radius-base;
+  box-sizing: border-box;
+  width: max-content;
+  padding: 10px 15px;
+  background-color: $accent-color;
+  font-weight: 600;
+  color: $text-white;
+  transition: filter $transition-duration ease;
+
+  &:hover:not(:disabled) {
+    filter: brightness(1.1);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    filter: brightness(0.8);
+  }
+
+  &__content {
+    display: inline-block;
+    transition: opacity 0.3s ease;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 14px;
+    height: 14px;
+    margin: auto;
+    border: 2px solid currentColor;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  &--loading {
+    cursor: default;
+
+    > .button__content {
+      opacity: 0;
+    }
+
+    &::after {
+      opacity: 1;
+    }
+  }
+}

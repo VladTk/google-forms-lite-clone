@@ -1,0 +1,54 @@
+@use '../../../styles/vars' as *;
+
+.switcher {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 4px;
+
+  &__label {
+    font-weight: 600;
+    color: $text-primary;
+  }
+
+  &__control {
+    position: relative;
+    width: 40px;
+    height: 20px;
+  }
+
+  &__input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  &__track {
+    width: 100%;
+    height: 100%;
+    background-color: $bg-secondary-surface;
+    border-radius: 9999px;
+    transition: background-color $transition-duration ease;
+
+    &--checked {
+      background-color: $accent-color;
+    }
+  }
+
+  &__thumb {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    background-color: $bg-primary-surface;
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    transition: transform $transition-duration ease;
+
+    &--checked {
+      transform: translateX(20px);
+    }
+  }
+}

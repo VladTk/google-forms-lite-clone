@@ -1,0 +1,18 @@
+@use '../../../styles/vars' as *;
+
+.textarea {
+  font-size: 14px;
+  max-width: 100%;
+  width: 100%;
+  height: min-content;
+  resize: none;
+  overflow: hidden;
+
+  padding-bottom: 4px;
+  border-bottom: 1px solid $text-secondary;
+  transition: border-color $transition-duration ease;
+
+  &:focus {
+    border-color: $accent-color;
+  }
+}

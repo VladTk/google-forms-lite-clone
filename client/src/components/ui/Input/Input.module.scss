@@ -1,0 +1,12 @@
+@use '../../../styles/vars' as *;
+
+.input {
+  font-size: 14px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid $text-secondary;
+  transition: border-color $transition-duration ease;
+
+  &:focus {
+    border-color: $accent-color;
+  }
+}

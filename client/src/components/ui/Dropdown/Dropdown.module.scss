@@ -1,0 +1,96 @@
+@use '../../../styles/vars' as *;
+
+.dropdown {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  row-gap: 4px;
+
+  width: 100%;
+  max-width: 200px;
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    box-sizing: border-box;
+    padding: 8px;
+    border: 1px solid $text-secondary;
+    color: $text-secondary;
+    background-color: $bg-primary-surface;
+    border-radius: $border-radius-base;
+
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    transition:
+      color $transition-duration ease,
+      border-color $transition-duration ease;
+
+    &:hover {
+      border-color: $text-primary;
+      color: $text-primary;
+    }
+
+    &:focus {
+      border-color: $text-primary;
+      color: $text-primary;
+    }
+
+    &--active {
+      border-color: $text-primary;
+    }
+  }
+
+  &__icon {
+    transition: transform $transition-duration ease;
+
+    &--active {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__list {
+    position: absolute;
+    z-index: 100;
+    top: 100%;
+    left: 0;
+    transform-origin: top;
+    transform: scaleY(0);
+
+    box-sizing: border-box;
+    width: 100%;
+    margin-top: 4px;
+    padding-block: 6px;
+    border: 1px solid $text-primary;
+    border-radius: $border-radius-base;
+
+    visibility: hidden;
+    opacity: 0;
+    background-color: $bg-primary-surface;
+
+    transition:
+      transform $transition-duration ease,
+      opacity $transition-duration ease;
+
+    &--active {
+      transform: scaleY(1);
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+
+  &__item {
+    cursor: pointer;
+    padding: 6px 12px;
+    color: $text-secondary;
+    transition: color $transition-duration ease-in-out;
+
+    &:hover {
+      color: $text-primary;
+    }
+  }
+}
