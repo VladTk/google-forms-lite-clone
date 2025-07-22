@@ -1,0 +1,22 @@
+.options {
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    row-gap: 4px;
+  }
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    column-gap: 6px;
+  }
+
+  &__icon {
+    width: 24px;
+    height: 24px;
+  }
+}

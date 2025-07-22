@@ -1,0 +1,27 @@
+@use '../../../../styles/vars' as *;
+
+.formmeta {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  row-gap: 32px;
+
+  padding: 24px 16px;
+
+  &__decor {
+    position: absolute;
+    width: 100%;
+    height: 16px;
+    background-color: $accent-color;
+    border-top-left-radius: $border-radius-base;
+    border-top-right-radius: $border-radius-base;
+    z-index: 1;
+    top: -2px;
+    left: 0;
+  }
+
+  &__input {
+    font-size: 24px;
+  }
+}
