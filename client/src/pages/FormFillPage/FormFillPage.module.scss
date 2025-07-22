@@ -1,0 +1,41 @@
+@use '../../styles/vars' as *;
+
+.fill {
+  margin-block: 36px;
+
+  &__container {
+    max-width: 768px;
+  }
+
+  &__error {
+    font-size: 16px;
+    font-weight: 600;
+    color: red;
+  }
+
+  &__overlay {
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.6);
+      z-index: 10;
+      pointer-events: all;
+      border-radius: $border-radius-base;
+    }
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 32px;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    row-gap: 24px;
+  }
+}
