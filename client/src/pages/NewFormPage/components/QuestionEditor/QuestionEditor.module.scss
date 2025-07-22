@@ -10,6 +10,18 @@
   &__header {
     display: flex;
     flex-direction: column;
+    row-gap: 24px;
+  }
+
+  &__error {
+    font-size: 16px;
+    font-weight: 600;
+    color: red;
+  }
+
+  &__inputs {
+    display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
     gap: 16px 32px;

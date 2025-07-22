@@ -26,15 +26,17 @@ type Props = {
     fields: Partial<LocalQuestionOption>,
   ) => void;
   onDeleteOption: (questionTempId: string, optionTempId: string) => void;
+  error?: string;
 };
 
-export const QuastionEditor: React.FC<Props> = ({
+export const QuestionEditor: React.FC<Props> = ({
   question,
   onUpdate,
   onDelete,
   onAddOption,
   onUpdateOption,
   onDeleteOption,
+  error,
 }) => {
   const typeOptions: DropdownOption<QuestionType>[] = Object.values(
     QuestionType,
@@ -49,20 +51,23 @@ export const QuastionEditor: React.FC<Props> = ({
   return (
     <ContentBlock className={styles.question}>
       <div className={styles.question__header}>
-        <Textarea
-          value={question.label}
-          onChange={e => onUpdate(question.tempId, { label: e.target.value })}
-          placeholder="Question"
-          className={styles.question__input}
-          rows={1}
-        />
+        {!!error && <p className={styles.question__error}>{error}</p>}
+        <div className={styles.question__inputs}>
+          <Textarea
+            value={question.label}
+            onChange={e => onUpdate(question.tempId, { label: e.target.value })}
+            placeholder="Question"
+            className={styles.question__input}
+            rows={1}
+          />
 
-        <Dropdown
-          value={question.type}
-          onChange={newType => onUpdate(question.tempId, { type: newType })}
-          options={typeOptions}
-          className={styles.question__dropdown}
-        />
+          <Dropdown
+            value={question.type}
+            onChange={newType => onUpdate(question.tempId, { type: newType })}
+            options={typeOptions}
+            className={styles.question__dropdown}
+          />
+        </div>
       </div>
 
       {(question.type === QuestionType.MULTIPLE_CHOICE ||

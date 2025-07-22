@@ -16,15 +16,16 @@ export function useLocalQuestions(initialQuestions: QuestionInput[] = []) {
     initLocalQuestions(initialQuestions),
   );
 
+  const createLocalQuestion = (): LocalQuestion => ({
+    tempId: uuidv4(),
+    label: '',
+    type: QuestionType.TEXT,
+    required: false,
+    options: [],
+  });
+
   const addQuestion = useCallback(() => {
-    const newQuestion: LocalQuestion = {
-      tempId: uuidv4(),
-      label: '',
-      type: QuestionType.TEXT,
-      required: false,
-      options: [],
-    };
-    setQuestions(qs => [...qs, newQuestion]);
+    setQuestions(qs => [...qs, createLocalQuestion()]);
   }, []);
 
   const updateQuestion = useCallback(
@@ -119,14 +120,19 @@ export function useLocalQuestions(initialQuestions: QuestionInput[] = []) {
     });
   }, [questions]);
 
-  const validateQuestions = useCallback((): string | null => {
+  const validateQuestions = useCallback((): Record<string, string> => {
+    const errors: Record<string, string> = {};
+
     if (questions.length === 0) {
-      return 'The form must contain at least one question.';
+      errors._form = 'The form must contain at least one question';
+      return errors;
     }
 
-    for (const q of questions) {
+    questions.forEach(q => {
+      const id = q.tempId;
       if (!q.label.trim()) {
-        return 'Each question must have a label.';
+        errors[id] = 'Question label is required';
+        return;
       }
 
       const isWithOptions =
@@ -135,18 +141,20 @@ export function useLocalQuestions(initialQuestions: QuestionInput[] = []) {
 
       if (isWithOptions) {
         if (!q.options || q.options.length === 0) {
-          return 'Questions with options must have at least one option.';
+          errors[id] = 'At least one option is required';
+          return;
         }
 
         for (const opt of q.options) {
           if (!opt.label.trim()) {
-            return 'All option labels must be filled.';
+            errors[id] = 'All option labels must be filled';
+            return;
           }
         }
       }
-    }
+    });
 
-    return null;
+    return errors;
   }, [questions]);
 
   return {

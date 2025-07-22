@@ -1,6 +1,6 @@
 @use '../../../../styles/vars' as *;
 
-.formmeta {
+.meta {
   position: relative;
 
   display: flex;
@@ -21,7 +21,19 @@
     left: 0;
   }
 
+  &__block {
+    display: flex;
+    flex-direction: column;
+    row-gap: 12px;
+  }
+
   &__input {
     font-size: 24px;
+  }
+
+  &__error {
+    font-size: 16px;
+    font-weight: 600;
+    color: red;
   }
 }

@@ -6,7 +6,7 @@ import {
   type DropResult,
 } from '@hello-pangea/dnd';
 
-import { QuastionEditor } from '../QuestionEditor';
+import { QuestionEditor } from '../QuestionEditor';
 import type { LocalQuestion, LocalQuestionOption } from '../../types';
 
 import styles from './QuestionListEditor.module.scss';
@@ -22,7 +22,8 @@ type Props = {
     fields: Partial<LocalQuestionOption>,
   ) => void;
   onDeleteOption: (questionTempId: string, optionTempId: string) => void;
-  onReorderQuestions: (fromIndex: number, toIndex: number) => void; // нове
+  onReorderQuestions: (fromIndex: number, toIndex: number) => void;
+  questionErrors?: Record<string, string>;
 };
 
 export const QuestionListEditor: React.FC<Props> = ({
@@ -33,6 +34,7 @@ export const QuestionListEditor: React.FC<Props> = ({
   onUpdateOption,
   onDeleteOption,
   onReorderQuestions,
+  questionErrors,
 }) => {
   if (!questions.length) {
     return null;
@@ -61,8 +63,9 @@ export const QuestionListEditor: React.FC<Props> = ({
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                   >
-                    <QuastionEditor
+                    <QuestionEditor
                       question={q}
+                      error={questionErrors?.[q.tempId]}
                       onUpdate={onUpdateQuestion}
                       onDelete={onDeleteQuestion}
                       onAddOption={onAddOption}
