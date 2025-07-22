@@ -1,0 +1,12 @@
+@use '../../../styles/vars' as *;
+
+.datepicker {
+  padding: 8px 12px;
+  border: 1px solid $border-gray;
+  border-radius: $border-radius-base;
+
+  &:focus {
+    outline: none;
+    border-color: $text-primary;
+  }
+}

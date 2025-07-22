@@ -3,4 +3,7 @@ export * from './Input';
 export * from './Textarea';
 export * from './Button';
 export * from './Switcher';
-export * from './Dropdown'
+export * from './Dropdown';
+export * from './Checkbox';
+export * from './DatePicker';
+export * from './RadioInput';
