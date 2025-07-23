@@ -34,7 +34,7 @@ export const FormResponsesPage: React.FC = () => {
   const hasData = !!(form && responses && responses.length > 0);
 
   const { currentIndex, onPrev, onNext } = usePaginatedResponses(
-    responses?.length ?? 0,
+    hasData ? responses.length : 0,
   );
   const currentResponse = !isLoading ? responses![currentIndex] : null;
 

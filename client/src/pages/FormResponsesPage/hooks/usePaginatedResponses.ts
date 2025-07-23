@@ -15,6 +15,8 @@ export const usePaginatedResponses = (responsesLength: number) => {
   );
 
   useEffect(() => {
+    if (responsesLength === 0) return;
+
     const idx = Number(responseIndex);
     const isInvalid = isNaN(idx) || idx < 1 || idx > responsesLength;
     if (isInvalid) {
