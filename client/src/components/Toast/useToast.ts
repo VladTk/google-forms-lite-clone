@@ -13,9 +13,12 @@ export const useToast = () => {
     type: 'success',
   });
 
-  const showToast = useCallback((message: string, type: 'success' | 'error') => {
-    setToast({ visible: true, message, type });
-  }, []);
+  const showToast = useCallback(
+    (message: string, type: 'success' | 'error') => {
+      setToast({ visible: true, message, type });
+    },
+    [],
+  );
 
   const hideToast = useCallback(() => {
     setToast(prev => ({ ...prev, visible: false }));

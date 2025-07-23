@@ -3,7 +3,7 @@ import type { Form, FormInput } from '@shared/types';
 
 type GraphQLResponse<T> = {
   data: T;
-}
+};
 
 export const formsApi = createApi({
   reducerPath: 'formsApi',

@@ -1,4 +1,4 @@
-import { InlineMessage } from "../../../../components";
+import { InlineMessage } from '../../../../components';
 
 export const ErrorOrEmptyState: React.FC<{
   isError: boolean;

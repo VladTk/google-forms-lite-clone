@@ -3,7 +3,7 @@ import type { Response as Resp, ResponseInput } from '@shared/types';
 
 type GraphQLResponse<T> = {
   data: T;
-}
+};
 
 export const responsesApi = createApi({
   reducerPath: 'responsesApi',

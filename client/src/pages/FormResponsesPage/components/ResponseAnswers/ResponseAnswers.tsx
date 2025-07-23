@@ -7,10 +7,7 @@ type Props = {
   response: Response;
 };
 
-export const ResponseAnswers: React.FC<Props> = ({
-  questions,
-  response,
-}) => (
+export const ResponseAnswers: React.FC<Props> = ({ questions, response }) => (
   <ul className={styles.answers}>
     {questions.map(question => {
       const answer = response.answers.find(a => a.questionId === question.id);

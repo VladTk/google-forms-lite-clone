@@ -3,7 +3,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { getValidIndexFromParam, indexToParam } from '../utils/pagination';
 
 export const usePaginatedResponses = (responsesLength: number) => {
-  const { id, responseIndex } = useParams<{ id: string; responseIndex?: string }>();
+  const { id, responseIndex } = useParams<{
+    id: string;
+    responseIndex?: string;
+  }>();
   const navigate = useNavigate();
 
   const currentIndex = useMemo(
