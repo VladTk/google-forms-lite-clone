@@ -1,5 +1,5 @@
 import React from 'react';
-import { ContentBlock } from '../../../../components';
+import { ContentBlock } from '..';
 
 import styles from './FormMeta.module.scss';
 

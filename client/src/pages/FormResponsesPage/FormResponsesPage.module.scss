@@ -1,0 +1,13 @@
+.responses-page {
+  margin-block: 36px;
+
+  &__container {
+    max-width: 768px;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    row-gap: 32px;
+  }
+}

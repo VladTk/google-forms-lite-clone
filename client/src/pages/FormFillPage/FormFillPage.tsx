@@ -4,10 +4,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useGetFormQuery } from '../../api/formsApi';
 import { useSubmitResponseMutation } from '../../api/responsesApi';
 
-import { FormMeta, QuestionItem } from './components';
+import { QuestionItem } from './components';
 import { type Answer } from '@shared/types';
 import { Button } from '../../components/ui';
-import { Container } from '../../components';
+import { Container, FormMeta } from '../../components';
 
 import { validateAnswers } from './utils';
 

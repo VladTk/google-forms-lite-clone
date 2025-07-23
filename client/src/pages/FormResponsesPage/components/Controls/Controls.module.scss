@@ -1,0 +1,11 @@
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+
+  &__counter {
+    font-weight: 600;
+    font-size: 16px;
+  }
+}

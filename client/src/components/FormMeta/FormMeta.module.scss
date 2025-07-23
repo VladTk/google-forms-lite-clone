@@ -1,13 +1,21 @@
-@use '../../../../styles/vars' as *;
-@use '../../../../styles/mixins' as *;
+@use '../../styles/vars' as *;
+@use '../../styles/mixins' as *;
 
 .meta {
   position: relative;
+  box-sizing: border-box;
   padding: 24px 16px;
 
   display: flex;
   flex-direction: column;
   row-gap: 24px;
+
+  &--loading {
+    height: 120px;
+    border-radius: $border-radius-base;
+
+    @include skeleton-loader;
+  }
 
   &__decor {
     position: absolute;

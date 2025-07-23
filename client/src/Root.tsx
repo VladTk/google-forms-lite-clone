@@ -26,6 +26,10 @@ export const Root: React.FC = () => {
           <Route path="forms/new" element={<NewFormPage />} />
           <Route path="forms/:id/fill" element={<FormFillPage />} />
           <Route path="forms/:id/responses" element={<FormResponsesPage />} />
+          <Route
+            path="forms/:id/responses/:responseIndex?"
+            element={<FormResponsesPage />}
+          />
 
           <Route path="*" element={<NotFoundPage />} />
         </Route>
