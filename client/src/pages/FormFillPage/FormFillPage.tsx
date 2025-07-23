@@ -1,29 +1,41 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import clsx from 'clsx';
 
 import { useGetFormQuery } from '../../api/formsApi';
 import { useSubmitResponseMutation } from '../../api/responsesApi';
-
-import { QuestionItem } from './components';
 import { type Answer } from '@shared/types';
-import { Button } from '../../components/ui';
-import { Container, FormMeta } from '../../components';
-
 import { validateAnswers } from './utils';
 
+import { Toast, useToast } from '../../components/Toast';
+import { QuestionItem, QuestionItemSkeleton } from './components';
+import { Button } from '../../components/ui';
+import {
+  Container,
+  FormMeta,
+  InlineMessage,
+  FormMetaSkeleton,
+} from '../../components';
+
 import styles from './FormFillPage.module.scss';
-import clsx from 'clsx';
 
 export const FormFillPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
-  const { data: form, isError: formError } = useGetFormQuery(id ?? '');
-  const [submitResponse, { isLoading, isSuccess, isError: submitError }] =
-    useSubmitResponseMutation();
+  const {
+    data: form,
+    isLoading: formLoading,
+    isError: formError,
+    refetch,
+  } = useGetFormQuery(id ?? '');
+  const [
+    submitResponse,
+    { isLoading: submitLoading, isSuccess, isError: submitError },
+  ] = useSubmitResponseMutation();
   const [answers, setAnswers] = useState<
     Record<string, Answer['value'] | Answer['values']>
   >({});
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const { toast, showToast, hideToast } = useToast();
 
   const handleAnswerChange = (
     questionId: string,
@@ -31,19 +43,19 @@ export const FormFillPage: React.FC = () => {
   ) => {
     setAnswers(prev => ({ ...prev, [questionId]: value }));
     setErrors(prev => {
-      const updated = { ...prev };
-      delete updated[questionId];
-      return updated;
+      const copy = { ...prev };
+      delete copy[questionId];
+      return copy;
     });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!form) return;
 
     const validationErrors = validateAnswers(form.questions, answers);
 
-    if (Object.keys(validationErrors).length > 0) {
+    if (Object.keys(validationErrors).length) {
       setErrors(validationErrors);
       return;
     }
@@ -59,43 +71,62 @@ export const FormFillPage: React.FC = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      navigate('/');
+      showToast('Response submitted successfully!', 'success');
+    } else if (submitError) {
+      showToast('Failed to submit response. Please try again.', 'error');
     }
-  }, [isSuccess, navigate]);
+  }, [isSuccess, submitError, showToast]);
 
   return (
     <main className={styles.fill}>
       <Container className={styles.fill__container}>
-        {formError || !form ? (
-          <p className={styles.fill__error}>
-            Error loading form. Please try again later.
-          </p>
+        {formLoading ? (
+          <div className={styles.fill__form}>
+            <FormMetaSkeleton />
+            <div className={styles.fill__list}>
+              {[...Array(3)].map((_, idx) => (
+                <div key={idx}>
+                  <QuestionItemSkeleton />
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : formError || !form ? (
+          <InlineMessage
+            title="Error loading form"
+            description="Please try again later."
+            actionLabel="Retry"
+            onAction={() => refetch()}
+          />
         ) : (
           <form onSubmit={handleSubmit} className={styles.fill__form}>
             <FormMeta title={form.title} description={form.description} />
-            <div className={clsx(isLoading && styles.fill__overlay)}>
+            <div className={clsx(submitLoading && styles.fill__overlay)}>
               <ul className={styles.fill__list}>
-                {form.questions.map(question => (
-                  <li key={question.id}>
+                {form.questions.map(q => (
+                  <li key={q.id}>
                     <QuestionItem
-                      question={question}
-                      value={answers[question.id]}
-                      onChange={val => handleAnswerChange(question.id, val)}
-                      error={errors[question.id]}
+                      question={q}
+                      value={answers[q.id]}
+                      onChange={val => handleAnswerChange(q.id, val)}
+                      error={errors[q.id]}
                     />
                   </li>
                 ))}
               </ul>
             </div>
-            <Button type="submit" loading={isLoading}>
+            <Button type="submit" loading={submitLoading}>
               Submit
             </Button>
-            {submitError && (
-              <p className={styles.fill__error}>
-                Failed to submit response. Please try again.
-              </p>
-            )}
           </form>
+        )}
+
+        {toast.visible && (
+          <Toast
+            message={toast.message}
+            type={toast.type}
+            onClose={hideToast}
+          />
         )}
       </Container>
     </main>

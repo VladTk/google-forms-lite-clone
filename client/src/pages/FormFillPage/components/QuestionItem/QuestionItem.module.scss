@@ -1,9 +1,17 @@
+@use '../../../../styles/mixins' as *;
+
 .question {
   padding: 24px 16px;
 
   display: flex;
   flex-direction: column;
   row-gap: 24px;
+
+  &--loading {
+    height: 110px;
+
+    @include skeleton-loader;
+  }
 
   &__info {
     display: flex;
