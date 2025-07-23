@@ -32,3 +32,30 @@
 
 All data (forms, questions, responses) is stored in-memory using JavaScript Maps.  
 **Note:** Data is not persisted between server restarts.
+
+
+## Getting Started
+
+Follow these steps to run the project locally:
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/VladTk/google-forms-lite-clone.git
+cd google-forms-lite-clone
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Run the development server
+
+```bash
+npm run dev
+```
+
+The client app will be available at: http://localhost:5173/
+The GraphQL server will be running at: http://localhost:4000/graphql

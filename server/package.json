@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "main": "dist/index.js",
   "scripts": {
-    "dev": "ts-node -r tsconfig-paths/register src/index.ts",
-    "build": "tsc -b"
+    "dev": "ts-node -r tsconfig-paths/register src/index.ts"
   },
   "dependencies": {
     "@graphql-tools/schema": "^10.0.25",
