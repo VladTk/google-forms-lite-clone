@@ -1,17 +1,16 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import clsx from 'clsx';
-import { useNavigate } from 'react-router-dom';
 
-import { Container } from '../../components';
+import { Container, Toast, useToast } from '../../components';
 import { Button } from '../../components/ui';
 import { FormMetadataEditor, QuestionListEditor } from './components';
 
 import { QuestionType } from '@shared/types';
 import { useCreateFormMutation } from '../../api/formsApi';
 import { useLocalQuestions } from './hooks/useLocalQuestions';
+import type { LocalQuestion, LocalQuestionOption } from './types';
 
 import styles from './NewFormPage.module.scss';
-import type { LocalQuestion, LocalQuestionOption } from './types';
 
 export const NewFormPage: React.FC = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -40,7 +39,8 @@ export const NewFormPage: React.FC = () => {
 
   const [createForm, { isLoading, isSuccess, isError }] =
     useCreateFormMutation();
-  const navigate = useNavigate();
+
+  const { toast, showToast, hideToast } = useToast();
 
   const clearError = useCallback((key: string) => {
     setErrors(prev => {
@@ -161,9 +161,15 @@ export const NewFormPage: React.FC = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      navigate('/');
+      showToast('Form created successfully!', 'success');
+    } else if (isError) {
+      showToast('Failed to create form. Please try again.', 'error');
     }
-  }, [isSuccess, navigate]);
+  }, [isSuccess, isError, showToast]);
+
+  const handleToastClose = useCallback(() => {
+    hideToast();
+  }, [hideToast]);
 
   return (
     <main className={styles['new-form-page']}>
@@ -197,15 +203,21 @@ export const NewFormPage: React.FC = () => {
               Publish
             </Button>
           </div>
-          {(isError || errors['form']) && (
+          {errors['form'] && (
             <div className={styles['new-form-page__error']}>
-              {isError
-                ? 'Something went wrong while publishing the form'
-                : errors['form']}
+              {errors['form']}
             </div>
           )}
         </div>
       </Container>
+
+      {toast.visible && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onClose={handleToastClose}
+        />
+      )}
     </main>
   );
 };
