@@ -13,25 +13,25 @@ export const formResolver = {
     createForm: (_: unknown, args: FormInput): Form => {
       const { title, description = '', questions = [] } = args;
 
-      for (const q of questions) {
+      for (const question of questions) {
         if (
-          (q.type === QuestionType.MULTIPLE_CHOICE ||
-            q.type === QuestionType.CHECKBOX) &&
-          (!q.options || q.options.length === 0)
+          (question.type === QuestionType.MULTIPLE_CHOICE ||
+            question.type === QuestionType.CHECKBOX) &&
+          (!question.options || question.options.length === 0)
         ) {
           throw new Error(
-            `Question of type ${q.type} requires at least one option.`,
+            `Question of type ${question.type} requires at least one option.`,
           );
         }
       }
 
-      const serverQuestions = questions.map(q => ({
+      const serverQuestions = questions.map(question => ({
         id: uuid(),
-        type: q.type,
-        label: q.label,
-        required: q.required ?? false,
+        type: question.type,
+        label: question.label,
+        required: question.required ?? false,
         options:
-          q.options?.map(opt => ({ id: uuid(), label: opt.label })) ?? [],
+          question.options?.map(opt => ({ id: uuid(), label: opt.label })) ?? [],
       }));
 
       const form: Form = {

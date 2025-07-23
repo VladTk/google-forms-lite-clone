@@ -6,10 +6,10 @@ import { QuestionType, type QuestionInput } from '@shared/types';
 
 export function useLocalQuestions(initialQuestions: QuestionInput[] = []) {
   const initLocalQuestions = (questions: QuestionInput[]): LocalQuestion[] =>
-    questions.map(q => ({
-      ...q,
+    questions.map(question => ({
+      ...question,
       tempId: uuidv4(),
-      options: q.options?.map(opt => ({ ...opt, tempId: uuidv4() })),
+      options: question.options?.map(opt => ({ ...opt, tempId: uuidv4() })),
     }));
 
   const [questions, setQuestions] = useState<LocalQuestion[]>(
@@ -30,26 +30,35 @@ export function useLocalQuestions(initialQuestions: QuestionInput[] = []) {
 
   const updateQuestion = useCallback(
     (tempId: string, updatedFields: Partial<LocalQuestion>) => {
-      setQuestions(qs =>
-        qs.map(q => (q.tempId === tempId ? { ...q, ...updatedFields } : q)),
+      setQuestions(prevQuestion =>
+        prevQuestion.map(question =>
+          question.tempId === tempId
+            ? { ...question, ...updatedFields }
+            : question,
+        ),
       );
     },
     [],
   );
 
   const deleteQuestion = useCallback((tempId: string) => {
-    setQuestions(qs => qs.filter(q => q.tempId !== tempId));
+    setQuestions(prevQuestion =>
+      prevQuestion.filter(question => question.tempId !== tempId),
+    );
   }, []);
 
   const addOption = useCallback((questionTempId: string) => {
-    setQuestions(qs =>
-      qs.map(q =>
-        q.tempId === questionTempId
+    setQuestions(prevQuestion =>
+      prevQuestion.map(question =>
+        question.tempId === questionTempId
           ? {
-              ...q,
-              options: [...(q.options || []), { tempId: uuidv4(), label: '' }],
+              ...question,
+              options: [
+                ...(question.options || []),
+                { tempId: uuidv4(), label: '' },
+              ],
             }
-          : q,
+          : question,
       ),
     );
   }, []);
@@ -60,18 +69,18 @@ export function useLocalQuestions(initialQuestions: QuestionInput[] = []) {
       optionTempId: string,
       updatedFields: Partial<LocalQuestionOption>,
     ) => {
-      setQuestions(qs =>
-        qs.map(q =>
-          q.tempId === questionTempId
+      setQuestions(prevQuestion =>
+        prevQuestion.map(question =>
+          question.tempId === questionTempId
             ? {
-                ...q,
-                options: q.options?.map(opt =>
+                ...question,
+                options: question.options?.map(opt =>
                   opt.tempId === optionTempId
                     ? { ...opt, ...updatedFields }
                     : opt,
                 ),
               }
-            : q,
+            : question,
         ),
       );
     },
@@ -80,14 +89,16 @@ export function useLocalQuestions(initialQuestions: QuestionInput[] = []) {
 
   const deleteOption = useCallback(
     (questionTempId: string, optionTempId: string) => {
-      setQuestions(qs =>
-        qs.map(q =>
-          q.tempId === questionTempId
+      setQuestions(prevQuestion =>
+        prevQuestion.map(question =>
+          question.tempId === questionTempId
             ? {
-                ...q,
-                options: q.options?.filter(opt => opt.tempId !== optionTempId),
+                ...question,
+                options: question.options?.filter(
+                  opt => opt.tempId !== optionTempId,
+                ),
               }
-            : q,
+            : question,
         ),
       );
     },
@@ -105,13 +116,13 @@ export function useLocalQuestions(initialQuestions: QuestionInput[] = []) {
 
   const getQuestionsForServer = useCallback((): QuestionInput[] => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    return questions.map(({ tempId, options, ...q }) => {
+    return questions.map(({ tempId, options, ...question }) => {
       const isWithOptions =
-        q.type === QuestionType.MULTIPLE_CHOICE ||
-        q.type === QuestionType.CHECKBOX;
+        question.type === QuestionType.MULTIPLE_CHOICE ||
+        question.type === QuestionType.CHECKBOX;
 
       return {
-        ...q,
+        ...question,
         ...(isWithOptions && {
           // eslint-disable-next-line @typescript-eslint/no-unused-vars
           options: options?.map(({ tempId, ...opt }) => opt),
@@ -128,24 +139,24 @@ export function useLocalQuestions(initialQuestions: QuestionInput[] = []) {
       return errors;
     }
 
-    questions.forEach(q => {
-      const id = q.tempId;
-      if (!q.label.trim()) {
+    questions.forEach(question => {
+      const id = question.tempId;
+      if (!question.label.trim()) {
         errors[id] = 'Question label is required';
         return;
       }
 
       const isWithOptions =
-        q.type === QuestionType.MULTIPLE_CHOICE ||
-        q.type === QuestionType.CHECKBOX;
+        question.type === QuestionType.MULTIPLE_CHOICE ||
+        question.type === QuestionType.CHECKBOX;
 
       if (isWithOptions) {
-        if (!q.options || q.options.length === 0) {
+        if (!question.options || question.options.length === 0) {
           errors[id] = 'At least one option is required';
           return;
         }
 
-        for (const opt of q.options) {
+        for (const opt of question.options) {
           if (!opt.label.trim()) {
             errors[id] = 'All option labels must be filled';
             return;

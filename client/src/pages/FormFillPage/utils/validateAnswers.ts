@@ -6,28 +6,28 @@ export const validateAnswers = (
 ): Record<string, string> => {
   const errors: Record<string, string> = {};
 
-  questions.forEach(q => {
-    if (!q.required) return;
+  questions.forEach(question => {
+    if (!question.required) return;
 
-    const value = answers[q.id];
+    const value = answers[question.id];
 
-    switch (q.type) {
+    switch (question.type) {
       case QuestionType.TEXT:
         if (typeof value !== 'string' || value.trim() === '') {
-          errors[q.id] = 'This field is required';
+          errors[question.id] = 'This field is required';
         }
         break;
 
       case QuestionType.DATE:
       case QuestionType.MULTIPLE_CHOICE:
         if (!value || value === '') {
-          errors[q.id] = 'Please select a value';
+          errors[question.id] = 'Please select a value';
         }
         break;
 
       case QuestionType.CHECKBOX:
         if (!Array.isArray(value) || value.length === 0) {
-          errors[q.id] = 'Please select at least one option';
+          errors[question.id] = 'Please select at least one option';
         }
         break;
     }

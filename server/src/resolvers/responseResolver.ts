@@ -17,7 +17,9 @@ export const responseResolver = {
         throw new Error('Form not found');
       }
 
-      const validQuestionIds = new Set(form.questions.map(q => q.id));
+      const validQuestionIds = new Set(
+        form.questions.map(question => question.id),
+      );
 
       for (const answer of answers) {
         const { questionId, value, values } = answer;

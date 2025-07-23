@@ -103,13 +103,13 @@ export const FormFillPage: React.FC = () => {
             <FormMeta title={form.title} description={form.description} />
             <div className={clsx(submitLoading && styles.fill__overlay)}>
               <ul className={styles.fill__list}>
-                {form.questions.map(q => (
-                  <li key={q.id}>
+                {form.questions.map(question => (
+                  <li key={question.id}>
                     <QuestionItem
-                      question={q}
-                      value={answers[q.id]}
-                      onChange={val => handleAnswerChange(q.id, val)}
-                      error={errors[q.id]}
+                      question={question}
+                      value={answers[question.id]}
+                      onChange={val => handleAnswerChange(question.id, val)}
+                      error={errors[question.id]}
                     />
                   </li>
                 ))}

@@ -55,8 +55,8 @@ export const QuestionListEditor: React.FC<Props> = ({
             ref={provided.innerRef}
             {...provided.droppableProps}
           >
-            {questions.map((q, index) => (
-              <Draggable key={q.tempId} draggableId={q.tempId} index={index}>
+            {questions.map((question, index) => (
+              <Draggable key={question.tempId} draggableId={question.tempId} index={index}>
                 {provided => (
                   <div
                     ref={provided.innerRef}
@@ -64,8 +64,8 @@ export const QuestionListEditor: React.FC<Props> = ({
                     {...provided.dragHandleProps}
                   >
                     <QuestionEditor
-                      question={q}
-                      error={questionErrors?.[q.tempId]}
+                      question={question}
+                      error={questionErrors?.[question.tempId]}
                       onUpdate={onUpdateQuestion}
                       onDelete={onDeleteQuestion}
                       onAddOption={onAddOption}
