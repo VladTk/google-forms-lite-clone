@@ -33,10 +33,12 @@ export const OptionItem: React.FC<Props> = ({
         }
         placeholder="Option"
         className={styles.option__input}
+        data-cy={`option-input-${option.tempId}`}
       />
       <button
         onClick={() => onDelete(questionTempId, option.tempId)}
         className={styles.option__btn}
+        data-cy={`option-delete-btn-${option.tempId}`}
       >
         ✕
       </button>

@@ -26,6 +26,7 @@ export const NewFormPage: React.FC = () => {
     updateOption,
     deleteOption,
     getQuestionsForServer,
+    setQuestions,
     reorderQuestions,
     validateQuestions,
   } = useLocalQuestions([
@@ -167,6 +168,16 @@ export const NewFormPage: React.FC = () => {
     }
   }, [isSuccess, isError, showToast]);
 
+  useEffect(() => {
+    if (isSuccess) {
+      setTitle('');
+      setDescription('');
+      setQuestions([]);
+      addQuestion();
+      setErrors({});
+    }
+  }, [addQuestion, isSuccess, setQuestions]);
+
   const handleToastClose = useCallback(() => {
     hideToast();
   }, [hideToast]);
@@ -198,15 +209,26 @@ export const NewFormPage: React.FC = () => {
             />
           </div>
           <div className={styles['new-form-page__buttons']}>
-            <Button onClick={handleAddQuestion} disabled={isLoading}>
+            <Button
+              onClick={handleAddQuestion}
+              disabled={isLoading}
+              data-cy="add-question-btn"
+            >
               Add question
             </Button>
-            <Button onClick={handlePublish} loading={isLoading}>
+            <Button
+              onClick={handlePublish}
+              loading={isLoading}
+              data-cy="publish-btn"
+            >
               Publish
             </Button>
           </div>
           {errors['form'] && (
-            <div className={styles['new-form-page__error']}>
+            <div
+              className={styles['new-form-page__error']}
+              data-cy="form-error"
+            >
               {errors['form']}
             </div>
           )}

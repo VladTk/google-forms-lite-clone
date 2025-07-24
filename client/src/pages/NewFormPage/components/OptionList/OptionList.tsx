@@ -41,6 +41,7 @@ export const OptionList: React.FC<Props> = ({
       <button
         onClick={() => onAdd(question.tempId)}
         className={styles.options__btn}
+        data-cy={`add-option-btn-${question.tempId}`}
       >
         <PlusIcon className={styles.options__icon} /> Add option
       </button>

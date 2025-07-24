@@ -7,7 +7,11 @@ type Props = React.HTMLAttributes<HTMLElement> & {
   children: ReactNode;
 };
 
-export const ContentBlock: React.FC<Props> = ({ children, className, ...rest }) => {
+export const ContentBlock: React.FC<Props> = ({
+  children,
+  className,
+  ...rest
+}) => {
   return (
     <article className={clsx(styles.block, className)} {...rest}>
       {children}

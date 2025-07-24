@@ -9,6 +9,7 @@ type Props = {
   name: string;
   className?: string;
   disabled?: boolean;
+  dataCy?: string;
 };
 
 export const RadioInput: React.FC<Props> = ({
@@ -18,9 +19,10 @@ export const RadioInput: React.FC<Props> = ({
   name,
   className,
   disabled,
+  dataCy,
 }) => {
   return (
-    <label className={clsx(styles.radio, className)}>
+    <label className={clsx(styles.radio, className)} data-cy={dataCy}>
       <input
         type="radio"
         checked={checked}

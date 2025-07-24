@@ -1,5 +1,4 @@
-import { graphqlUrl } from "./constants";
-
+import { graphqlUrl } from './constants';
 
 export const interceptLoading = (alias: string, delay = 1000) => {
   cy.intercept('POST', graphqlUrl, req => {

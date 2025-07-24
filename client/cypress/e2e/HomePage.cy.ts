@@ -24,7 +24,10 @@ describe('HomePage', () => {
     cy.wait('@getFormsError');
 
     cy.get('[data-cy="inline-message"]').should('exist');
-    cy.get('[data-cy="inline-message-title"]').should('contain', 'Error loading forms');
+    cy.get('[data-cy="inline-message-title"]').should(
+      'contain',
+      'Error loading forms',
+    );
     cy.get('[data-cy="inline-message-action"]').should('contain', 'Retry');
   });
 

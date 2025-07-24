@@ -51,7 +51,14 @@ export const QuestionEditor: React.FC<Props> = ({
   return (
     <ContentBlock className={styles.question}>
       <div className={styles.question__header}>
-        {!!error && <p className={styles.question__error}>{error}</p>}
+        {!!error && (
+          <p
+            className={styles.question__error}
+            data-cy={`question-error-${question.tempId}`}
+          >
+            {error}
+          </p>
+        )}
         <div className={styles.question__inputs}>
           <Textarea
             value={question.label}
@@ -59,6 +66,7 @@ export const QuestionEditor: React.FC<Props> = ({
             placeholder="Question"
             className={styles.question__input}
             rows={1}
+            data-cy={`question-input-${question.tempId}`}
           />
 
           <Dropdown
@@ -66,6 +74,7 @@ export const QuestionEditor: React.FC<Props> = ({
             onChange={newType => onUpdate(question.tempId, { type: newType })}
             options={typeOptions}
             className={styles.question__dropdown}
+            dataCy={`question-type-dropdown-${question.tempId}`}
           />
         </div>
       </div>
@@ -85,10 +94,12 @@ export const QuestionEditor: React.FC<Props> = ({
           checked={question.required ?? false}
           onChange={checked => onUpdate(question.tempId, { required: checked })}
           label="Required"
+          data-cy={`required-switch-${question.tempId}`}
         />
         <button
           onClick={() => onDelete(question.tempId)}
           className={styles.question__btn}
+          data-cy={`delete-question-btn-${question.tempId}`}
         >
           <DeleteIcon className={styles.question__icon} />
         </button>

@@ -19,15 +19,24 @@ export const QuestionItem: React.FC<Props> = ({
   error,
 }) => {
   return (
-    <ContentBlock className={styles.question}>
+    <ContentBlock className={styles.question} data-cy="question-item">
       <div className={styles.question__info}>
-        <p className={styles.question__label}>
+        <p className={styles.question__label} data-cy="question-label">
           {question.label}
           {question.required && ' *'}
         </p>
-        {!!error && <p className={styles.question__error}>{error}</p>}
+        {!!error && (
+          <p className={styles.question__error} data-cy="question-error">
+            {error}
+          </p>
+        )}
       </div>
-      <QuestionInput question={question} value={value} onChange={onChange} />
+      <QuestionInput
+        question={question}
+        value={value}
+        onChange={onChange}
+        questionId={question.id}
+      />
     </ContentBlock>
   );
 };

@@ -15,12 +15,20 @@ export const FormCard: React.FC<Props> = ({ form }) => {
     <ContentBlock className={styles.card}>
       <div className={styles.card__decor}></div>
       <div className={styles.card__info}>
-        <h4 className={styles.card__title} data-cy="form-title">{title}</h4>
-        <p className={styles.card__description} data-cy="form-description">{description}</p>
+        <h4 className={styles.card__title} data-cy="form-title">
+          {title}
+        </h4>
+        <p className={styles.card__description} data-cy="form-description">
+          {description}
+        </p>
       </div>
       <div className={styles.card__links}>
-        <ButtonLink to={`/forms/${id}/fill`} data-cy="form-view-btn">View Form</ButtonLink>
-        <ButtonLink to={`/forms/${id}/responses`} data-cy="form-responses-btn">Responses</ButtonLink>
+        <ButtonLink to={`/forms/${id}/fill`} data-cy="form-view-btn">
+          View Form
+        </ButtonLink>
+        <ButtonLink to={`/forms/${id}/responses`} data-cy="form-responses-btn">
+          Responses
+        </ButtonLink>
       </div>
     </ContentBlock>
   );

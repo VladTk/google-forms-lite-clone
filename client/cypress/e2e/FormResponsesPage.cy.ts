@@ -20,7 +20,10 @@ describe('FormResponsesPage', () => {
     cy.wait('@getFormError');
 
     cy.get('[data-cy="inline-message"]').should('exist');
-    cy.get('[data-cy="inline-message-title"]').should('contain', 'Failed to load data');
+    cy.get('[data-cy="inline-message-title"]').should(
+      'contain',
+      'Failed to load data',
+    );
     cy.get('[data-cy="inline-message-description"]').should(
       'contain',
       'An error occurred while loading the form or responses',
@@ -61,7 +64,10 @@ describe('FormResponsesPage', () => {
     cy.visit(pageUrl);
     cy.wait('@getFormEmpty');
 
-    cy.get('[data-cy="inline-message-title"]').should('contain', 'No responses yet');
+    cy.get('[data-cy="inline-message-title"]').should(
+      'contain',
+      'No responses yet',
+    );
     cy.get('[data-cy="inline-message-description"]').should(
       'contain',
       "Once users submit responses, you'll see them here",
@@ -139,7 +145,9 @@ describe('FormResponsesPage', () => {
     cy.get('[data-cy="form-meta"]').should('exist');
     cy.get('[data-cy="response-answers"]').should('exist');
 
-    cy.get('[data-cy="answer-label"]').first().should('contain', 'How was the service?');
+    cy.get('[data-cy="answer-label"]')
+      .first()
+      .should('contain', 'How was the service?');
     cy.get('[data-cy="answer-value"]').first().should('contain', 'Great!');
 
     cy.get('[data-cy="control-counter"]').should('contain', '1 / 2');

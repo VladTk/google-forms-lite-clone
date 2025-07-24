@@ -30,19 +30,27 @@ export const FormMetadataEditor: React.FC<Props> = ({
           onChange={e => onTitleChange(e.target.value)}
           placeholder="Form Title"
           className={styles.meta__input}
+          data-cy="form-title-input"
           autoFocus
         />
-        {titleError && <p className={styles.meta__error}>{titleError}</p>}
+        {titleError && (
+          <p className={styles.meta__error} data-cy="title-error">
+            {titleError}
+          </p>
+        )}
       </div>
       <div className={styles.meta__block}>
         <Textarea
           value={description}
           onChange={e => onDescriptionChange(e.target.value)}
           placeholder="Form Description"
+          data-cy="form-description-textarea"
           rows={1}
         />
         {descriptionError && (
-          <p className={styles.meta__error}>{descriptionError}</p>
+          <p className={styles.meta__error} data-cy="description-error">
+            {descriptionError}
+          </p>
         )}
       </div>
     </ContentBlock>

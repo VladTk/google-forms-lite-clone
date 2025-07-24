@@ -31,7 +31,8 @@ export const formResolver = {
         label: question.label,
         required: question.required ?? false,
         options:
-          question.options?.map(opt => ({ id: uuid(), label: opt.label })) ?? [],
+          question.options?.map(opt => ({ id: uuid(), label: opt.label })) ??
+          [],
       }));
 
       const form: Form = {

@@ -54,9 +54,14 @@ export const QuestionListEditor: React.FC<Props> = ({
             className={styles.list}
             ref={provided.innerRef}
             {...provided.droppableProps}
+            data-cy="question-list"
           >
             {questions.map((question, index) => (
-              <Draggable key={question.tempId} draggableId={question.tempId} index={index}>
+              <Draggable
+                key={question.tempId}
+                draggableId={question.tempId}
+                index={index}
+              >
                 {provided => (
                   <div
                     ref={provided.innerRef}

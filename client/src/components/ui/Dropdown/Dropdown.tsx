@@ -13,9 +13,16 @@ type Props<T> = {
   value: T;
   onChange: (value: T) => void;
   className?: string;
+  dataCy?: string;
 };
 
-export function Dropdown<T>({ options, value, onChange, className }: Props<T>) {
+export function Dropdown<T>({
+  options,
+  value,
+  onChange,
+  className,
+  dataCy,
+}: Props<T>) {
   const [isOpen, setIsOpen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const selectedOption = options.find(o => o.value === value) || options[0];
@@ -51,6 +58,7 @@ export function Dropdown<T>({ options, value, onChange, className }: Props<T>) {
         aria-haspopup="listbox"
         aria-expanded={isOpen}
         type="button"
+        data-cy={dataCy}
       >
         {selectedOption?.label}
         <ArrowDownIcon
@@ -80,6 +88,7 @@ export function Dropdown<T>({ options, value, onChange, className }: Props<T>) {
               )}
               role="option"
               aria-selected={option.value === selectedOption.value}
+              data-cy={`dropdown-item-${option.label}`}
             >
               {option.label}
             </li>

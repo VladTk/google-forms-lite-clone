@@ -100,12 +100,22 @@ export const FormFillPage: React.FC = () => {
             onAction={() => refetch()}
           />
         ) : (
-          <form onSubmit={handleSubmit} className={styles.fill__form}>
+          <form
+            onSubmit={handleSubmit}
+            className={styles.fill__form}
+            data-cy="form-fill-form"
+          >
             <FormMeta title={form.title} description={form.description} />
-            <div className={clsx(submitLoading && styles.fill__overlay)}>
-              <ul className={styles.fill__list}>
+            <div
+              className={clsx(submitLoading && styles.fill__overlay)}
+              data-cy="form-fill-overlay"
+            >
+              <ul
+                className={styles.fill__list}
+                data-cy="form-fill-questions-list"
+              >
                 {form.questions.map(question => (
-                  <li key={question.id}>
+                  <li key={question.id} data-cy="form-fill-question-item">
                     <QuestionItem
                       question={question}
                       value={answers[question.id]}
@@ -116,7 +126,11 @@ export const FormFillPage: React.FC = () => {
                 ))}
               </ul>
             </div>
-            <Button type="submit" loading={submitLoading}>
+            <Button
+              type="submit"
+              loading={submitLoading}
+              data-cy="form-fill-submit-btn"
+            >
               Submit
             </Button>
           </form>

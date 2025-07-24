@@ -33,7 +33,6 @@
 All data (forms, questions, responses) is stored in-memory using JavaScript Maps.  
 **Note:** Data is not persisted between server restarts.
 
-
 ## Getting Started
 
 Follow these steps to run the project locally:
