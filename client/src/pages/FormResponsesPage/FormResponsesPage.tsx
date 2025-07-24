@@ -20,6 +20,7 @@ export const FormResponsesPage: React.FC = () => {
     isLoading: formLoading,
     error: formError,
     refetch: refetchForm,
+    isFetching: formFetching,
   } = useGetFormQuery(id!, { skip: !id });
 
   const {
@@ -27,16 +28,22 @@ export const FormResponsesPage: React.FC = () => {
     isLoading: responsesLoading,
     error: responsesError,
     refetch: refetchResponses,
+    isFetching: responseFetching,
   } = useGetResponsesQuery(id!, { skip: !id });
 
-  const isLoading = formLoading || responsesLoading;
-  const hasError = !!(formError || responsesError);
+  const isLoading =
+    formLoading || responsesLoading || formFetching || responseFetching;
+  const hasError = !isLoading && (formError != null || responsesError != null);
+
   const hasData = !!(form && responses && responses.length > 0);
 
   const { currentIndex, onPrev, onNext } = usePaginatedResponses(
     hasData ? responses.length : 0,
   );
-  const currentResponse = !isLoading ? responses![currentIndex] : null;
+  const currentResponse =
+    !isLoading && responses && currentIndex < responses.length
+      ? responses[currentIndex]
+      : null;
 
   return (
     <main className={styles['responses-page']}>

@@ -26,6 +26,7 @@ export const FormFillPage: React.FC = () => {
     isLoading: formLoading,
     isError: formError,
     refetch,
+    isFetching: formFetching,
   } = useGetFormQuery(id ?? '');
   const [
     submitResponse,
@@ -80,7 +81,7 @@ export const FormFillPage: React.FC = () => {
   return (
     <main className={styles.fill}>
       <Container className={styles.fill__container}>
-        {formLoading ? (
+        {formLoading || formFetching ? (
           <div className={styles.fill__form}>
             <FormMetaSkeleton />
             <div className={styles.fill__list}>

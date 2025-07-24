@@ -6,12 +6,18 @@ import { Container, InlineMessage } from '../../components';
 import styles from './HomePage.module.scss';
 
 export const HomePage: React.FC = () => {
-  const { data: forms, isLoading, isError, refetch } = useGetFormsQuery();
+  const {
+    data: forms,
+    isLoading,
+    isError,
+    refetch,
+    isFetching,
+  } = useGetFormsQuery();
 
   return (
     <main className={styles.home}>
       <Container>
-        {isLoading && <FormListSkeleton />}
+        {(isLoading || isFetching) && <FormListSkeleton />}
         {isError && (
           <InlineMessage
             title="Error loading forms"

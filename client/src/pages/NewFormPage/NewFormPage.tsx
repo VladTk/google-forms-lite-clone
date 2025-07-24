@@ -175,14 +175,16 @@ export const NewFormPage: React.FC = () => {
     <main className={styles['new-form-page']}>
       <Container className={styles['new-form-page__container']}>
         <div className={styles['new-form-page__editor']}>
-          <FormMetadataEditor
-            title={title}
-            description={description}
-            onTitleChange={handleTitleChange}
-            onDescriptionChange={handleDescriptionChange}
-            titleError={errors.title}
-            descriptionError={errors.description}
-          />
+          <div className={clsx(isLoading && styles['new-form-page__overlay'])}>
+            <FormMetadataEditor
+              title={title}
+              description={description}
+              onTitleChange={handleTitleChange}
+              onDescriptionChange={handleDescriptionChange}
+              titleError={errors.title}
+              descriptionError={errors.description}
+            />
+          </div>
           <div className={clsx(isLoading && styles['new-form-page__overlay'])}>
             <QuestionListEditor
               questions={questions}
