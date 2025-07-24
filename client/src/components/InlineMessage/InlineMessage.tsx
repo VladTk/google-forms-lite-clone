@@ -17,13 +17,27 @@ export const InlineMessage: React.FC<Props> = ({
   onAction,
 }) => {
   return (
-    <ContentBlock className={styles['inline-message']}>
-      <h2 className={styles['inline-message__title']}>{title}</h2>
+    <ContentBlock className={styles['inline-message']} data-cy="inline-message">
+      <h2
+        className={styles['inline-message__title']}
+        data-cy="inline-message-title"
+      >
+        {title}
+      </h2>
       {description && (
-        <p className={styles['inline-message__description']}>{description}</p>
+        <p
+          className={styles['inline-message__description']}
+          data-cy="inline-message-description"
+        >
+          {description}
+        </p>
       )}
       {actionLabel && onAction && (
-        <Button className={styles['inline-message__button']} onClick={onAction}>
+        <Button
+          className={styles['inline-message__button']}
+          onClick={onAction}
+          data-cy="inline-message-action"
+        >
           {actionLabel}
         </Button>
       )}

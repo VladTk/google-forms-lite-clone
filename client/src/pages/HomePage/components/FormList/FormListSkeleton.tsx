@@ -5,7 +5,7 @@ import { NewFormCard } from '../NewFormCard';
 
 export const FormListSkeleton = () => {
   return (
-    <div className={styles['form-list__list']}>
+    <div className={styles['form-list__list']} data-cy="home-loading">
       <div className={styles['form-list__item']}>
         <NewFormCard />
       </div>

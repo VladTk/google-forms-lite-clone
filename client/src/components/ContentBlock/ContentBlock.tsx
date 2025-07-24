@@ -3,13 +3,14 @@ import type { ReactNode } from 'react';
 import clsx from 'clsx';
 import styles from './ContentBlock.module.scss';
 
-type Props = {
+type Props = React.HTMLAttributes<HTMLElement> & {
   children: ReactNode;
-  className?: string;
 };
 
-export const ContentBlock: React.FC<Props> = ({ children, className }) => {
+export const ContentBlock: React.FC<Props> = ({ children, className, ...rest }) => {
   return (
-    <article className={clsx(styles.block, className)}>{children}</article>
+    <article className={clsx(styles.block, className)} {...rest}>
+      {children}
+    </article>
   );
 };
