@@ -9,7 +9,7 @@ type Props = {
 };
 
 export const FormMeta: React.FC<Props> = ({ title, description }) => (
-  <ContentBlock className={styles.meta}>
+  <ContentBlock className={styles.meta} data-cy="form-meta">
     <div className={styles.meta__decor}></div>
     <h3 className={styles.meta__title}>{title}</h3>
     <p className={styles.meta__description}>{description}</p>

@@ -1,35 +1,16 @@
+/// <reference types="cypress" />
+
+import { graphqlUrl } from '../support/constants';
+import { interceptLoading, interceptError } from '../support/interceptors';
+
+const mockForms = [
+  { id: '1', title: 'Survey A', description: 'Description A' },
+  { id: '2', title: 'Survey B', description: 'Description B' },
+];
+
 describe('HomePage', () => {
-  const graphqlUrl = 'http://localhost:4000/graphql';
-
-  const interceptLoading = () => {
-    cy.intercept('POST', graphqlUrl, (req) => {
-      if (req.body.operationName === 'GetForms') {
-        req.on('response', (res) => {
-          res.setDelay(1000);
-        });
-      }
-    }).as('getForms');
-  };
-
-  const interceptError = () => {
-    cy.intercept('POST', graphqlUrl, (req) => {
-      req.reply({
-        statusCode: 500,
-        body: { errors: [{ message: 'Internal Server Error' }] },
-      });
-    }).as('getFormsError');
-  };
-
-  const interceptSuccess = (mockForms) => {
-    cy.intercept('POST', graphqlUrl, (req) => {
-      req.reply({
-        body: { data: { forms: mockForms } },
-      });
-    }).as('getFormsSuccess');
-  };
-
   it('displays loading state', () => {
-    interceptLoading();
+    interceptLoading('getForms');
 
     cy.visit('/');
     cy.get('[data-cy="home-loading"]').should('exist');
@@ -37,7 +18,7 @@ describe('HomePage', () => {
   });
 
   it('displays error message on failure', () => {
-    interceptError();
+    interceptError('getFormsError');
 
     cy.visit('/');
     cy.wait('@getFormsError');
@@ -48,12 +29,11 @@ describe('HomePage', () => {
   });
 
   it('displays list of forms when successful', () => {
-    const mockForms = [
-      { id: '1', title: 'Survey A', description: 'Description A' },
-      { id: '2', title: 'Survey B', description: 'Description B' },
-    ];
-
-    interceptSuccess(mockForms);
+    cy.intercept('POST', graphqlUrl, req => {
+      req.reply({
+        body: { data: { forms: mockForms } },
+      });
+    }).as('getFormsSuccess');
 
     cy.visit('/');
     cy.wait('@getFormsSuccess');

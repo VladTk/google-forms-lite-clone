@@ -34,10 +34,14 @@ export const AnswerItem: React.FC<Props> = ({ question, answer }) => {
   };
 
   return (
-    <ContentBlock className={styles.answer}>
-      <p className={styles.answer__label}>{question.label}</p>
+    <ContentBlock className={styles.answer} data-cy="answer-item">
+      <p className={styles.answer__label} data-cy="answer-label">
+        {question.label}
+      </p>
 
-      <div className={styles.answer__value}>{renderAnswer()}</div>
+      <div className={styles.answer__value} data-cy="answer-value">
+        {renderAnswer()}
+      </div>
     </ContentBlock>
   );
 };
